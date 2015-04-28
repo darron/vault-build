@@ -1,0 +1,31 @@
+box: darron/ubuntu14.04@1.0.2
+no-response-timeout: 10
+build:
+  steps:
+    - script:
+        name: prepare the required items.
+        code: |
+          sudo apt-get update
+          sudo apt-get install -y libssl-dev unzip && sudo gem install fpm-cookery --no-ri --no-rdoc
+    - script:
+        name: get the source and build
+        code: |
+          git clone https://github.com/darron/vault-build.git
+          cd fpm-recipes/vault
+          sudo fpm-cook install-deps
+          sudo fpm-cook
+  after-steps:
+    - wantedly/pretty-slack-notify:
+        webhook_url: $SLACK_WEBHOOK_URL
+deploy:
+  steps:
+    - script:
+        name: push to packagecloud
+        code: |
+          sudo gem install package_cloud --no-ri --no-rdoc
+          PACKAGECLOUD=$(eval echo "\$PACKAGECLOUD_TOKEN") && echo -e "$PACKAGECLOUD" > ~/.packagecloud && chmod 600 ~/.packagecloud
+          DEB_FILE=$(find . -name '*.deb') && package_cloud push darron/vault/ubuntu/trusty $DEB_FILE
+          DEB_FILE=$(find . -name '*.deb') && package_cloud push darron/octohost/ubuntu/trusty $DEB_FILE
+  after-steps:
+      - wantedly/pretty-slack-notify:
+          webhook_url: $SLACK_WEBHOOK_URL
