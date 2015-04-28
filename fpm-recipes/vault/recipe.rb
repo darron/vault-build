@@ -21,7 +21,7 @@ class Vault < FPM::Cookery::Recipe
 
   def build
     safesystem "mkdir -p #{builddir}/usr/local/bin/"
-    safesystem "cp -f #{builddir}/vault #{builddir}/usr/local/bin/"
+    safesystem "cp -f #{builddir}/vault_#{version}_linux_amd64/vault #{builddir}/usr/local/bin/"
   end
 
   def install
