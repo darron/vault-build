@@ -2,7 +2,7 @@ class Vault < FPM::Cookery::Recipe
   name 'vault'
 
   version '0.1.2'
-  revision '1'
+  revision '2'
   description 'Vault'
 
   homepage 'https://www.vaultproject.io/'
