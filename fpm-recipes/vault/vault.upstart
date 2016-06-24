@@ -2,14 +2,13 @@ description "Vault"
 
 emits vault-up
 
-start on runlevel [2345]
 stop on runlevel [!2345]
 
 script
   if [ -f /etc/default/vault ]; then
     . /etc/default/vault
   fi
-  export GOMAXPROCS=${GOMAXPROCS}
+  
   CMD="/usr/local/bin/vault $VAULT_OPTIONS"
   LOGFILE="/var/log/vault.log"
   exec $CMD >> "$LOGFILE"

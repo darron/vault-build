@@ -1,3 +1,2 @@
 # Options for Vault
-GOMAXPROCS=4
 VAULT_OPTIONS="server -config /etc/vault/vault.hcl"
