@@ -1,13 +1,13 @@
 class Vault < FPM::Cookery::Recipe
   name 'vault'
 
-  version '0.6.2'
+  version '0.6.5'
   revision '1'
   description 'Vault'
 
   homepage 'https://www.vaultproject.io/'
   source "https://releases.hashicorp.com/vault/#{version}/vault_#{version}_linux_amd64.zip"
-  sha256 'f62340a33d8f4e6d71c2bd748ba279d88b5c63ab33a73a36dca402ecbf084f2f'
+  sha256 'c9d414a63e9c4716bc9270d46f0a458f0e9660fd576efb150aede98eec16e23e'
 
   maintainer 'Darron Froese <darron@froese.org>'
   vendor 'octohost'
